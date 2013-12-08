@@ -1,0 +1,14 @@
+extends layout
+
+block content
+ header
+   h1= title
+  ul#retweets
+    if(typeof(code) != "undefined")
+      each item in code
+        li
+          img(src="logo.jpg")
+          span Twitter Owner: #{item.tweetOwner} Tweet: #{item.tweetText}
+
+          hr
+    p @JirsonTavera
