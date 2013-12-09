@@ -8,6 +8,10 @@ var express = require('express'),
     http    = require('http'),
     path    = require('path');
 
+/*
+ * EXPRESS SERVER CONFIGURATION
+*/
+
 var app = express();
 
 app.configure(function() {
@@ -28,6 +32,10 @@ app.configure('development', function() {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+
+/*
+ * Start the HTTP server
+ */
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log("Express server listening on port " + app.get('port'));
