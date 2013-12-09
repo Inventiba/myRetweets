@@ -8,6 +8,8 @@ var twit = new twitter( {
     access_token_key: '302743670-tW5XMpMXgIC8FerBy2oujCJgZdcoIxVf8E3gyjFv',
     access_token_secret: 'zU9m8RXkTwBMSovAJ93LVBRG2zQ7JS6IGvUF45iAYLseH'
 });
+// @maz variables name : "twit" should be called "twitterApi" in order to
+//      distinguish it from tweet items
 
 exports.index = function(req, res) {
 
@@ -22,7 +24,10 @@ exports.index = function(req, res) {
         if (!err) {
             var retweets = {};
             var i=0;
+            // @maz "i = 0" (addtional spaces required)
             for (var twett in data) {
+                // @maz variable name "twett" => "tweet" / "item"
+                //      !!! no spelling mistake please
                 //if tweet is a retweet
                 if (data[twett].retweeted == true) {
                     //tweet owner
@@ -32,15 +37,19 @@ exports.index = function(req, res) {
                     var retweetText = str[1];
                     //retweet :)
                     var retweet = {"tweetOwner": screenName, "tweetText":retweetText};
+                    // @maz simpler => { owner: xyz, text: xyz }
                     retweets[i]=retweet;
+                    // @maz ^^^ spaces required
                     i++;
                 }
             }
             console.log(retweets);
             var jt = JSON.stringify(retweets);
+            // @maz never used :(
             res.render('index', { title: 'My retweets',error:'', code: retweets });
         } else {
             res.send(err, 400);
           }
+          // @maz indentation error
     });
 };

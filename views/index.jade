@@ -1,11 +1,18 @@
+//- @maz indentation is really wrong here :(
+
 extends layout
 
 block content
  header
    h1= title
   ul#retweets
+    //- @maz "if (" (missing one space between if and "(")
     if(typeof(code) != "undefined")
       each item in code
+        //- @maz "code" variable name is not a good choice => should be tweets, or items
+        //-      if you use "tweets" => then one item should be called "tweet"
+        //-      if you use "items" => then one item should be called "item"
+        //-      !IMPORTANT : be coherent in you names
         li
           img(src="logo.jpg")
           span Twitter Owner: #{item.tweetOwner} Tweet: #{item.tweetText}
