@@ -1,6 +1,6 @@
 body {
-  padding: 17px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 17px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 header {
     height: 170px;
@@ -19,7 +19,7 @@ img {
     height: 12px;
 }
 a {
-  color: #00B7FF;
+    color: #00B7FF;
 }
 p {
     background-color: #36D3E4;
