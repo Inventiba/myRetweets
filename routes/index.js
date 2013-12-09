@@ -2,14 +2,14 @@
  * GET home page.
  */
 var twitter = require('ntwitter');
-var twit = new twitter( {
+var twitterApi = new twitter( {
     consumer_key: 'aMqJIVr3n5jdzWCgBsZw',
     consumer_secret: 'DAiMY3vgwg4WkDX2qRGc4K0c0eqNPnyNNGcFCDiW2o',
     access_token_key: '302743670-tW5XMpMXgIC8FerBy2oujCJgZdcoIxVf8E3gyjFv',
     access_token_secret: 'zU9m8RXkTwBMSovAJ93LVBRG2zQ7JS6IGvUF45iAYLseH'
 });
 
-exports.index = function(req, res) {
+exports.index = function(request, response) {
 
     /**
      * gets userTimeLine and filter retweets to be shown
@@ -18,29 +18,27 @@ exports.index = function(req, res) {
      * @param  {[numeric]} counr [description]
      * @return {[json array]}      [description]
      */
-    twit.getUserTimeline( {'user_id':302743670, 'count':200,'include_rts':true,}, function(err, data) {
+    twitterApi.getUserTimeline( {'user_id':302743670, 'count':50, 'include_rts':true}, function(err, data) {
         if (!err) {
             var retweets = {};
-            var i=0;
-            for (var twett in data) {
+            var i = 0;
+            for (var tweet in data) {
                 //if tweet is a retweet
-                if (data[twett].retweeted == true) {
+                if (data[tweet].retweeted === true) {
                     //tweet owner
-                    var screenName = "@"+data[twett].retweeted_status.user.screen_name;
+                    var screenName = "@"+data[tweet].retweeted_status.user.screen_name;
                     //removing screenName from retweet text
-                    var str = data[twett].text.split(": ");
+                    var str = data[tweet].text.split(": ");
                     var retweetText = str[1];
                     //retweet :)
-                    var retweet = {"tweetOwner": screenName, "tweetText":retweetText};
-                    retweets[i]=retweet;
+                    var retweet = {"owner": screenName, "text":retweetText};
+                    retweets[i] = retweet;
                     i++;
                 }
             }
-            console.log(retweets);
-            var jt = JSON.stringify(retweets);
-            res.render('index', { title: 'My retweets',error:'', code: retweets });
+            response.render('index', { title: 'My retweets',error:'', tweets: retweets });
         } else {
-            res.send(err, 400);
-          }
+            response.send(err, 400);
+            }
     });
 };
