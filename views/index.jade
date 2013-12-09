@@ -3,12 +3,13 @@ extends layout
 block content
  header
    h1= title
+
   ul#retweets
-    if(typeof(code) != "undefined")
-      each item in code
+    if ( typeof(tweets) != "undefined" )
+      each tweet in tweets
         li
           img(src="logo.jpg")
-          span Twitter Owner: #{item.tweetOwner} Tweet: #{item.tweetText}
+          span Twitter Owner: #{tweet.owner} Tweet: #{tweet.text}
 
           hr
     p @JirsonTavera
